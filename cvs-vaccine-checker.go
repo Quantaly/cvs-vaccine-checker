@@ -10,7 +10,9 @@ import (
 	"github.com/Quantaly/cvs-vaccine-checker/structs"
 )
 
-// defined by me as "a ~30-minute-or-less drive according to Google Maps"
+const apiEndpoint string = "https://www.cvs.com/immunizations/covid-19-vaccine.vaccine-status.CO.json?vaccineinfo"
+
+// for me, this was defined as "a ~30-minute-or-less drive according to Google Maps"
 var nearbyCities []string = []string{
 	"AURORA",
 	"BOULDER",
@@ -34,7 +36,7 @@ func main() {
 		json.Unmarshal(stateJson, &lastState) // don't care about the error here
 	}
 
-	req, err := http.NewRequest("GET", "https://www.cvs.com/immunizations/covid-19-vaccine.vaccine-status.CO.json?vaccineinfo", nil)
+	req, err := http.NewRequest("GET", apiEndpoint, nil)
 	if err != nil {
 		log.Fatalln(err)
 	}
